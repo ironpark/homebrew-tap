@@ -1,0 +1,33 @@
+name: Test
+
+# Every formula pushed here is installed and tested from the tap as a user
+# would, on macOS and on Linux.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Set up Homebrew
+        if: runner.os == 'Linux'
+        run: echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
+      - name: Install and test each formula
+        run: |
+          brew tap ironpark/tap "https://github.com/${GITHUB_REPOSITORY}"
+          for f in $(brew tap-info --json ironpark/tap | jq -r '.[0].formula_names[]'); do
+            brew install "$f"
+            brew test "$f"
+          done
+      - name: Run ggui
+        run: |
+          ggui version
+          ggui help | head -5
+          ggui doctor || true
