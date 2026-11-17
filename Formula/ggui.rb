@@ -6,9 +6,9 @@
 class Ggui < Formula
   desc "Create, run, check and bundle ggui applications"
   homepage "https://github.com/ironpark/ggui"
-  url "https://proxy.golang.org/github.com/ironpark/ggui/cmd/ggui/@v/v0.1.0.zip"
-  version "0.1.0"
-  sha256 "21ab80e7bff0c0768ab7d43e781ee37473e66a85844402c2f25b19af5de3f34b"
+  url "https://proxy.golang.org/github.com/ironpark/ggui/cmd/ggui/@v/v0.2.0.zip"
+  version "0.2.0"
+  sha256 "1e65e5635029829b60a1d8faa9937102bd0295e68ab18a45c6cb427a493c5c25"
 
   depends_on "go"
 
@@ -16,6 +16,8 @@ class Ggui < Formula
     # The module zip holds the module below its path and version.
     cd "ironpark/ggui/cmd/ggui@v#{version}" do
       ENV["GOWORK"] = "off"
+      # Built as the release binaries are; the command needs no cgo.
+      ENV["CGO_ENABLED"] = "0"
       system "go", "build", *std_go_args(ldflags: "-s -w -X main.releaseVersion=v#{version}")
     end
   end
