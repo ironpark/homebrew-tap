@@ -1,8 +1,8 @@
 # Written by the release workflow of github.com/ironpark/gvx-desktop; edits
 # made here are overwritten by the next release.
 cask "gvx-desktop" do
-  version "0.5.0"
-  sha256 "4fa528b0fdd93790a22de97b70198d273933d471b34e365aea627439cfe803e6"
+  version "0.5.1"
+  sha256 "6d480c375c0958a636c9e816b772638fe334447ef3d5b2639aba600bf85ae9ee"
 
   url "https://github.com/ironpark/gvx-desktop/releases/download/v#{version}/gvx-desktop-#{version}-macos-arm64.dmg"
   name "GVX Desktop"
