@@ -6,9 +6,9 @@
 class Ggui < Formula
   desc "Create, run, check and bundle ggui applications"
   homepage "https://github.com/ironpark/ggui"
-  url "https://proxy.golang.org/github.com/ironpark/ggui/cmd/ggui/@v/v0.7.2.zip"
-  version "0.7.2"
-  sha256 "1ee40264d2f614d5acab1615af4b09dc045ee845bc3b4898c15e425d437f8031"
+  url "https://proxy.golang.org/github.com/ironpark/ggui/cmd/ggui/@v/v0.7.3.zip"
+  version "0.7.3"
+  sha256 "55ca7f5a3866e7168c79f9c92f9ce4a0d626b5f4e899e86071d593c7f87a788e"
   license "Apache-2.0"
 
   depends_on "go"
