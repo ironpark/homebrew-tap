@@ -1,8 +1,8 @@
 # Written by the release workflow of github.com/ironpark/gvx-desktop; edits
 # made here are overwritten by the next release.
 cask "gvx-desktop" do
-  version "0.9.0"
-  sha256 "f2760fba87ee97457d8749b3320345516c4780b11c5e9796036c15e49a6c5abd"
+  version "0.10.0"
+  sha256 "1c19696d28109a62764ce93f42b2a13a98e6eb3f909f192977294a5a7eb8797c"
 
   url "https://github.com/ironpark/gvx-desktop/releases/download/v#{version}/gvx-desktop-#{version}-macos-arm64.dmg"
   name "GVX Desktop"
@@ -14,12 +14,18 @@ cask "gvx-desktop" do
 
   app "GVX Desktop.app"
 
-  zap trash: "~/Library/Application Support/gvx-desktop"
-
   # The app is signed ad hoc, not with an Apple Developer ID: macOS would
   # refuse to open it while it carries the quarantine of a download.
   postflight do
     system_command "/usr/bin/xattr",
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/GVX Desktop.app"]
   end
+
+  # Quit the running app before an upgrade or uninstall replaces it, so the
+  # old version does not keep running from the replaced bundle. The app stops
+  # its sandboxes as it quits (or asks first, as its settings say), and
+  # Homebrew opens the new version again after an upgrade.
+  uninstall quit: "io.github.ironpark.gvx-desktop"
+
+  zap trash: "~/Library/Application Support/gvx-desktop"
 end
